@@ -1,22 +1,3 @@
-# import requests
-# from bs4 import BeautifulSoup
-# from selenium import webdriver
-# from selenium.webdriver.firefox.service import Service as FirefoxService
-# from webdriver_manager.firefox import GeckoDriverManager
-# from selenium.webdriver.support.ui import WebDriverWait
-# URL = 'https://www.counter-strike.net/news/updates'
-# # page= requests.get(URL)
-# # soup = BeautifulSoup(page.text, 'html.parser')
-# # results = soup.find(id="application_config")
-# # print(results)
- 
-# driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
- 
-# driver.get(URL) 
-# wait = WebDriverWait(driver, 10)
-# print(driver.page_source.encode("utf-8"))
-# driver.quit()
-
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -24,9 +5,9 @@ import csv
 from discordwebhook import Discord
 curr_date = []
 file_name = 'recentupdate.csv'
-# Define your target URL
+# Defining target URL
 url = 'https://store.steampowered.com/events/ajaxgetpartnereventspageable/?clan_accountid=0&appid=730&offset=0&count=100&l=english&origin=https://www.counter-strike.net'
-# discord = Discord(url="https://discord.com/api/webhooks/1235077710385250366/XuJNVGPZg9gl9wNh7JYxouEbj2-IXa4MYU-d_oSWyDvCHL-wguEKy9tJazjBtvL6Phho") 
+
 # Send an HTTP GET request and fetch the HTML content
 response = requests.get(url)
 discord_url = "https://discord.com/api/webhooks/1235077710385250366/XuJNVGPZg9gl9wNh7JYxouEbj2-IXa4MYU-d_oSWyDvCHL-wguEKy9tJazjBtvL6Phho"
@@ -45,7 +26,7 @@ patch_Notes = patch_Notes[16:-9]
 
 # TODO: Count how many times VAC is mentioned and show the count on the title 
 # TODO: Create logic to display image or gif if the word VAC is mentioned or not in the patch notes
-
+# TODO: Use AWS Lambda, Amazon S3 and Amazon Event bridge to automate the scraping
 
 with open(file_name, "r",newline = '', encoding="utf-8") as f:
     csvreader=csv.reader(f)
