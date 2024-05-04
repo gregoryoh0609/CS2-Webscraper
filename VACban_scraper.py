@@ -26,11 +26,12 @@ def hover_action(driver):
     hover_action = ActionChains(driver)
     hover_action.move_to_element(unhide_element).perform()
     hover_action.move_by_offset(450,0).perform()
-    time.sleep(2)
+    time.sleep(3)
     print("Completed hover action")
 
 def get_ban_info(driver):
-    ban_Info = driver.find_element(By.XPATH,"/html/body/main/div/div[4]/div/div")
+    # ban_Info = driver.find_element(By.XPATH,"/html/body/main/div/div[3]/div/div")
+    ban_Info = driver.find_element(By.XPATH,"//div[@class='highcharts-label highcharts-tooltip highcharts-color-undefined']")
     return ban_Info
         
 def decode_ban_info(data):
