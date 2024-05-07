@@ -9,7 +9,7 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-
+import boto3
 
 class WebDriver(object):
     def __init__(self):
@@ -46,6 +46,33 @@ def get_ban_info(driver):
         'Year' : year,
         'VAC_count' : vac_num
         }
+    
+def get_json(text):
+    json_data = json.loads(str(text))
+    return json_data
+
+def get_recent_data(json):
+    vac_Count = 0 
+    notes = json['events'][0]['announcement_body']['body']
+    notes = notes[16:-9]
+    date = json['events'][0]['event_name']
+    notes_split = notes.split(' ')
+    for word in notes_split:
+        if word.lower() == "vac":
+            vac_Count +=1
+    return {
+        'Date' : date,
+        'Notes' : notes,
+        'VAC_Word_Count' : vac_Count
+    }
+
+def get_html(link):
+    response = requests.get(link)
+    html = response.text
+    return html
+
+
+
 
 # depreciated function         
 # def decode_ban_info(data):
